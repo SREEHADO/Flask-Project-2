@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Add Note{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-7">
+
+        <div class="d-flex align-items-center gap-3 mb-4">
+            <a href="/dashboard" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <h3 class="page-header mb-0">Add New Note</h3>
+        </div>
+
+        <div class="card p-4 p-md-5">
+            <form method="post" action="/addnote">
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Note Title <span class="text-danger">*</span></label>
+                    <input type="text" name="title" class="form-control form-control-lg"
+                           placeholder="e.g. Meeting Summary, Shopping List..." required maxlength="100"
+                           autofocus>
+                    <div class="form-text">Maximum 100 characters</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Content <span class="text-danger">*</span></label>
+                    <textarea name="content" class="form-control" rows="10"
+                              placeholder="Write your note here..." required></textarea>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-success btn-lg flex-fill fw-semibold">
+                        <i class="bi bi-check-lg me-2"></i>Save Note
+                    </button>
+                    <a href="/dashboard" class="btn btn-outline-secondary btn-lg">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

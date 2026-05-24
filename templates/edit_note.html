@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Edit Note{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0" style="border-radius: 12px;">
+                <div class="card-header bg-light border-0" style="border-radius: 12px 12px 0 0; padding: 1.5rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="fw-bold mb-0">
+                            <i class="bi bi-pencil-square me-2" style="color: #f59e0b;"></i>Edit Note
+                        </h3>
+                        <a href="/dashboard" class="btn btn-sm btn-light rounded-pill px-3">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="post" action="/editnote/{{ note[0] }}">
+                        <!-- Note Title Field -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold mb-2">
+                                <i class="bi bi-file-text me-2" style="color: #6366f1;"></i>Note Title
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="title" class="form-control form-control-lg" 
+                                   placeholder="e.g. Meeting Summary, Shopping List..." 
+                                   value="{{ note[1] }}" required maxlength="100"
+                                   style="border-radius: 8px; border: 2px solid #e5e7eb;">
+                            <small class="text-muted d-block mt-2">Maximum 100 characters</small>
+                        </div>
+
+                        <!-- Note Content Field -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold mb-2">
+                                <i class="bi bi-file-earmark-text me-2" style="color: #6366f1;"></i>Content
+                                <span class="text-danger">*</span>
+                            </label>
+                            <textarea name="content" class="form-control form-control-lg" 
+                                      placeholder="Write your note here..." 
+                                      rows="10" required
+                                      style="border-radius: 8px; border: 2px solid #e5e7eb; font-family: inherit;">{{ note[2] }}</textarea>
+                            <small class="text-muted d-block mt-2">
+                                <i class="bi bi-info-circle me-1"></i>Make your changes and save them
+                            </small>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2 gap-sm-2">
+                            <div class="row g-2">
+                                <div class="col-12 col-sm-6">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100" style="border-radius: 8px;">
+                                        <i class="bi bi-check-circle me-2"></i>Save Changes
+                                    </button>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <a href="/dashboard" class="btn btn-outline-secondary btn-lg w-100" style="border-radius: 8px;">
+                                        <i class="bi bi-x-circle me-2"></i>Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Card Footer with Info -->
+                <div class="card-footer bg-light border-0 text-muted small" style="border-radius: 0 0 12px 12px; padding: 1rem;">
+                    <i class="bi bi-clock-history me-1"></i>
+                    Last modified: {{ note[3].strftime('%Y-%m-%d %H:%M') if note[3].__class__.__name__ == 'datetime' else note[3] }}
+                </div>
+            </div>
+
+            <!-- Helpful Tip -->
+            <div class="alert alert-info mt-4" role="alert">
+                <i class="bi bi-lightbulb me-2"></i>
+                <strong>Tip:</strong> Your changes are saved automatically when you click the "Save Changes" button.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CSS for better styling -->
+<style>
+    @media (max-width: 576px) {
+        .card-body {
+            padding: 1rem !important;
+        }
+        
+        .form-control-lg, .btn-lg {
+            font-size: 0.95rem;
+            padding: 0.6rem 0.8rem;
+        }
+    }
+
+    /* Focus effects for inputs */
+    .form-control:focus {
+        border-color: #6366f1 !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    /* Smooth transitions */
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-4">
+        <div class="card p-4 p-md-5">
+
+            <div class="text-center mb-4">
+                <div class="mb-3" style="font-size:3rem;">📝</div>
+                <h3 class="fw-bold page-header">Welcome Back</h3>
+                <p class="text-muted small">Sign in to access your notes</p>
+            </div>
+
+            <!-- action="" = same URL, method="post" = sends data securely -->
+            <form method="post" action="/login">
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Username</label>
+                    <input type="text" name="username" class="form-control"
+                           placeholder="Enter your username" required autofocus>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="pwdField" class="form-control"
+                               placeholder="Enter your password" required>
+                        <!-- Eye button to show/hide password -->
+                        <button class="btn btn-outline-secondary" type="button" id="togglePwd">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-end mb-4">
+                    <a href="/forgot" class="small text-decoration-none" style="color:#6366f1;">Forgot Password?</a>
+                </div>
+
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg fw-semibold">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </button>
+                </div>
+
+            </form>
+
+            <hr>
+            <p class="text-center text-muted small mb-0">
+                Don't have an account?
+                <a href="/register" class="fw-semibold text-decoration-none" style="color:#6366f1;">Register here</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Toggle password visibility
+    document.getElementById('togglePwd').addEventListener('click', function () {
+        const pwd = document.getElementById('pwdField');
+        const icon = document.getElementById('eyeIcon');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            icon.className = 'bi bi-eye-slash';
+        } else {
+            pwd.type = 'password';
+            icon.className = 'bi bi-eye';
+        }
+    });
+</script>
+{% endblock %}
